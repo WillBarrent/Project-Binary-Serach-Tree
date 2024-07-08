@@ -86,25 +86,61 @@ class Tree {
 
     levelOrder(queue = [this.root]) {
         if (this.root === null) return null;
-        
+
         if (queue.length !== 0) {
             const current = queue.pop();
             console.log(current.data);
             if (current.left !== null) queue.unshift(current.left);
             if (current.right !== null) queue.unshift(current.right);
             this.levelOrder(queue);
-        }   
+        }
     }
 
-    inOrder(callback) { }
+    inOrder(node = this.root) {
+        if (node === null) return;
 
-    preOrder(callback) { }
+        this.inOrder(node.left);
+        console.log(node.data);
+        this.inOrder(node.right);
+    }
 
-    postOrder(callback) { }
+    preOrder(node = this.root) {
+        if (node === null) return;
 
-    height(node) { }
+        console.log(node.data);
+        this.inOrder(node.left);
+        this.inOrder(node.right);
+    }
 
-    depth(node) { }
+    postOrder(node = this.root) {
+        if (node === null) return;
+
+        this.inOrder(node.left);
+        this.inOrder(node.right);
+        console.log(node.data);
+    }
+
+    height(node) {
+        if (node === null)
+            return 0;
+
+        let leftNode = this.height(node.left) + 1;
+        let rightNode = this.height(node.right) + 1;
+    
+        return leftNode >= rightNode ? leftNode : rightNode;
+    }
+
+    depth(node, root = this.root) {
+        if (root.data === node.data) {
+            return 0;
+        }
+
+        if (root.data > node.data) {
+            return this.depth(node, root.left) + 1;
+        } else {
+            return this.depth(node, root.right) + 1;
+        }
+    }
 
     isBalanced() { }
 
