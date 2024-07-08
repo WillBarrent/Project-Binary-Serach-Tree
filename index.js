@@ -34,5 +34,3 @@ const tree = new Tree();
 tree.root = tree.buildTree(sortAndRemove(array));
 
 prettyPrint(tree.root);
-
-console.log(tree.find(4));

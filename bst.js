@@ -61,13 +61,11 @@ class Tree {
     }
 
     minValue(node) {
-        let minVal = node.data;
-        while (node.left !== null) {
-            minVal = node.left.data;
-            node = node.left;
+        if (node.left !== null) {
+            node = this.minValue(node.left);
         }
 
-        return minVal;
+        return node.data;
     }
 
     find(value, node = this.root) {
