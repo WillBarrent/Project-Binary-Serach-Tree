@@ -34,3 +34,5 @@ const tree = new Tree();
 tree.root = tree.buildTree(sortAndRemove(array));
 
 prettyPrint(tree.root);
+
+tree.levelOrder();

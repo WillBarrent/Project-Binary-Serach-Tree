@@ -17,7 +17,7 @@ class Tree {
 
         node.left = this.buildTree(array, start, middle - 1);
         node.right = this.buildTree(array, middle + 1, end);
-    
+
         return node;
     }
 
@@ -84,8 +84,15 @@ class Tree {
         return returnNode;
     }
 
-    levelOrder(callback) {
-        
+    levelOrder() {
+        if (this.root === null) return null;
+        this.queue.push(this.root);
+        while (this.queue.length !== 0) {
+            const current = this.queue.pop();
+            console.log(current.data);
+            if (current.left !== null) this.queue.unshift(current.left);
+            if (current.right !== null) this.queue.unshift(current.right);
+        }
     }
 
     inOrder(callback) { }
