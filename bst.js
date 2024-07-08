@@ -84,15 +84,16 @@ class Tree {
         return returnNode;
     }
 
-    levelOrder() {
+    levelOrder(queue = [this.root]) {
         if (this.root === null) return null;
-        this.queue.push(this.root);
-        while (this.queue.length !== 0) {
-            const current = this.queue.pop();
+        
+        if (queue.length !== 0) {
+            const current = queue.pop();
             console.log(current.data);
-            if (current.left !== null) this.queue.unshift(current.left);
-            if (current.right !== null) this.queue.unshift(current.right);
-        }
+            if (current.left !== null) queue.unshift(current.left);
+            if (current.right !== null) queue.unshift(current.right);
+            this.levelOrder(queue);
+        }   
     }
 
     inOrder(callback) { }
