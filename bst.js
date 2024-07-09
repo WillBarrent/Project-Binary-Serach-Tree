@@ -97,26 +97,28 @@ class Tree {
     }
 
     inOrder(node = this.root) {
-        if (node === null) return;
+        if (node === null) return [];
 
-        this.inOrder(node.left);
-        console.log(node.data);
-        this.inOrder(node.right);
+        let leftHalf = [...this.inOrder(node.left)];
+        let rightHalf = [...this.inOrder(node.right)];
+    
+        return [...leftHalf, node.data ,...rightHalf];
     }
 
     preOrder(node = this.root) {
         if (node === null) return;
 
         console.log(node.data);
-        this.inOrder(node.left);
-        this.inOrder(node.right);
+        this.preOrder(node.left);
+        this.preOrder(node.right);
     }
 
     postOrder(node = this.root) {
         if (node === null) return;
 
-        this.inOrder(node.left);
-        this.inOrder(node.right);
+        this.postOrder(node.left);
+        this.postOrder(node.right);
+        
         console.log(node.data);
     }
 
@@ -142,9 +144,28 @@ class Tree {
         }
     }
 
-    isBalanced() { }
+    isBalanced(node = this.root) {
+        if (node === null) {
+            return 0;
+        }
 
-    rebalance() { }
+        let leftNode = 0, rightNode = 0;
+
+        if (this.root.left !== null)
+            leftNode = this.height(node.left) + 1;
+        if (this.root.right !== null)
+            rightNode = this.height(node.right) + 1;
+
+        if (leftNode - rightNode > 1) return false;
+
+        return true;
+    }
+
+    rebalance() {
+        const arrayFromTree = this.inOrder();
+
+        this.root = this.buildTree(arrayFromTree);
+    }
 }
 
 export { Tree }

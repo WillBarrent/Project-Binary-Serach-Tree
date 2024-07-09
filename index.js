@@ -35,4 +35,4 @@ tree.root = tree.buildTree(sortAndRemove(array));
 tree.insert(2);
 prettyPrint(tree.root);
 
-console.log(tree.height(tree.root));
+console.log(tree.isBalanced());
